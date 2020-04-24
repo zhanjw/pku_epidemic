@@ -18,7 +18,6 @@ class EmailReporter:
         self.server_port = server_port
         self.enable_ssl = ssl
         self.server = smtplib.SMTP(self.server_addr, self.server_port)
-        self.server.set_debuglevel(2)
 
     def login(self):
         if self.enable_ssl:
@@ -39,4 +38,3 @@ class EmailReporter:
 
     def exit(self):
         self.server.quit()
-

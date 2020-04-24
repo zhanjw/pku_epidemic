@@ -6,6 +6,7 @@ import random
 from datetime import datetime
 
 from remote import EmailReporter
+from log import create_logger
 
 """
 Part I 必需填写
@@ -73,6 +74,8 @@ server_addr = ''  # 邮箱的SMTP服务器地址，详见邮箱设置
 server_port = 25  # SMTP服务器的端口，默认为25，可不修改
 ssl = False  # 是否采用SSL加密，可不修改
 
+logger = create_logger()
+
 
 def report():
     sess = requests.Session()
@@ -94,12 +97,14 @@ def report():
 
 
 if __name__ == '__main__':
-    from pprint import pprint
-    pprint(info)
-    exit()
-    result = report()
+    try:
+        result = report()
+        content = '填报成功。返回值：' + result
+    except Exception as e:
+        content = '填报失败。错误内容：' + str(e)
+    logger.info(content)
     if use_email_reporter:
         reporter = EmailReporter(sender, password, receiver, server_addr, server_port, ssl)
         reporter.login()
-        reporter.send('填报成功。' + result, '燕园云战“疫” ' + datetime.now().strftime('%Y%m%d'))
+        reporter.send(content, '燕园云战“疫” ' + datetime.now().strftime('%Y%m%d'))
         reporter.exit()
