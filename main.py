@@ -51,12 +51,12 @@ info = {
     'tbrq': datetime.now().strftime('%Y%m%d'),  # 填报日期，自动生成
     'yqzd': health_status,  # 疫情诊断
 
-    # 下面的不知道有什么用
-    'dwdzxx': '',
-    'dwjd': '',
-    'dwwd': '',
+    'dwdzxx': '',  # 定位地址信息
+    'dwjd': '',  # 定位经度
+    'dwwd': '',  # 定位纬度
     'sfdrfj': '',
     'chdfj': '',
+    'jkm': '绿码',  # 健康码状态
     'simstoken': '',
 }
 
